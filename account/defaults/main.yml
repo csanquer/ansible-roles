@@ -1,0 +1,185 @@
+---
+sudo_cmd_aliases:
+  SHELLS:    "/bin/sh, /bin/bash, /bin/dash, /usr/bin/rsh, /usr/bin/csh, /usr/bin/ksh, /usr/local/bin/tcsh, /usr/bin/zsh"
+  SU:        "/bin/su"
+  PASSWORD:  "/usr/bin/passwd"
+
+sudo_files: []
+  # - { sudogroup: 'admin', prefix: '01', command_user: 'ALL', nopasswd_commands: ['ALL'], commands: [] }
+
+
+skel_files: 
+  - { src: "etc/skel/{{ ansible_os_family|lower }}/" }
+  - { src: "etc/skel/.zshrc" }
+
+skel_templates: 
+  - { src: "etc/skel/.bash_aliases.j2" }
+
+skel_default_bash_aliases:
+  bc: 'bc -l'
+  vi: 'vim'
+  lessvim: '/usr/share/vim/vim73/macros/less.sh'
+  suvi: 'sudo vim'
+  emacs: 'emacs -nw'
+  suemacs: 'sudo emacs -nw'
+  ls: 'ls --color=auto'
+  ll: 'ls -lhaF'
+  la: 'ls -A'
+  l: 'ls -CF'
+  dir: 'ls --color=auto --format=vertical'
+  vdir: 'ls --color=auto --format=long'
+  lr: 'll -R'
+  lt: 'lstree'
+  lat: 'lsatree'
+  grep: 'grep --color=auto'
+  fgrep: 'fgrep --color=auto'
+  egrep: 'egrep --color=auto'
+  ack: 'ack-grep'
+  ackp: 'ack-grep --nocolor --pager="less -r"'
+  findsvn: 'find . -type d -name .svn'
+  findtilde: 'find . -name "*~"'
+  findcrlf: 'find . -not -type d -exec file "{}" ";" | grep CRLF'
+  findmac: 'find . \( -type d -name "__MACOSX" \) -o \( -type f -name ".DS_Store" \)'
+  rmt: 'trash-put'
+  rmmac: 'rm -rf `find . \( -type d -name "__MACOSX" \) -o \( -type f -name ".DS_Store" \)`'
+  rmsvn: 'rm -rf `find . -type d -name .svn`'
+  rmtilde: 'rm -f `find . -name "*~"`'
+  rmkeepsvn: 'rm -rf `find . -not \( -name ''.svn'' -type d -prune \) -type f `'
+  rmgit: 'rm -rf `find . -type d -name .git`'
+  rmkeepgit: 'rm -rf `find . -not \( -name ''.git'' -type d -prune \) -type f `'
+  findtextfiles: 'find . -type f \! -regex ".*\.\(jpg\|ico\|bmp\|jpeg\|png\|svg\|psd\|swf\|z\|tar\|zip\|bz2\|7z\|gz\|tgz\|phar\|jar\)" \! -path "*svn*" \! -path "*.git/*"'
+  fromdosr: 'find . -type f \! -regex ".*\.\(jpg\|ico\|bmp\|jpeg\|png\|svg\|psd\|swf\|z\|tar\|zip\|bz2\|7z\|gz\|tgz\|phar\|jar\)" \! -path "*svn*" \! -path "*.git/*" -exec fromdos {} \;'
+  todosr: 'find . -type f \! -regex ".*\.\(jpg\|ico\|bmp\|jpeg\|png\|svg\|psd\|swf\|z\|tar\|zip\|bz2\|7z\|gz\|tgz\|phar\|jar\)" \! -path "*svn*" \! -path "*.git/*" -exec todos {} \;'
+  screen: 'screen -'
+  sc: 'screen'
+  scdr: 'screen -dR '
+  scls: 'screen -ls'
+  tm: 'tmux'
+  tmls: 'tmux ls'
+  tman: 'if tmux has; then tmux attach -d; else tmux new; fi'
+  clr: 'clear'
+  du: 'du -h'
+  dus: 'du -s'
+  duf: 'du -sk * | sort -n | perl -ne ''\''''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}''\'''''
+  dufr: 'du -sk * | sort -nr | perl -ne ''\''''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}''\'''''
+  df: 'df -hT --total'
+  wanhost: 'wget -q -O- ifconfig.me/host'
+  wanip: 'wget -q -O- ifconfig.me/ip'
+  dk: 'docker'
+  dkc: 'docker-compose'
+  dkm: 'docker-machine'
+  dkrmorph: 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+  dkrmexit: 'docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
+  pip2upgrade: 'sudo pip2 freeze --local | grep -v \''^\-e\'' | cut -d = -f 1  | sudo xargs pip2 install -U'
+  pip3upgrade: 'sudo pip3 freeze --local | grep -v \''^\-e\'' | cut -d = -f 1  | sudo xargs pip3 install -U'
+
+skel_bash_aliases: {}
+
+
+skel_gitignore: 
+  - '.svn'
+  - '_svn'
+  - '.CVS'
+  - '.arch-params'
+  - '.bzr'
+  - '_darcs'
+  - '.hg'
+  - '.monotone'
+  - '.DS_Store'
+  - '__MACOSX'
+  - '.directory'
+  - '.settings'
+  - '.buildpath'
+  - '.project'
+  - '.cache'
+  - '.idea'
+  - 'nbproject'
+  - '.netbeans'
+  - 'catalog.xml'
+  - '*.geany'
+  - '*~'
+
+
+
+skel_gitconfig:
+  user:
+    name:
+    email:
+  color:
+    ui: 'true'
+  core:
+    excludesfile: '~/.gitignore'
+    autocrlf: 'input'
+    editor: vim
+  alias:
+    # show aliases
+    alias: '!git config --list | grep ''alias\\.'' | sed ''s/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/'' | sort'
+    # make the current directory a new repo and commit the first import
+    this: '!git init && git add . && git commit -m \"initial commit\"'
+    # shortcuts
+    cl: clone
+    co: checkout
+    br: branch
+    ci: commit
+    cim: commit -m
+    cia: commit -a
+    ciam: commit -am
+    cip: commit -p
+    ciap: commit -a -p
+    st: status
+    fc: fetch
+    mg: merge
+    rb: rebase
+    rs: reset
+    rv: revert
+    pl: pull
+    pr: pull --rebase
+    ready: rebase -i @{u}
+    ps: push
+    sh: show --color-words
+    df: diff
+    hp: help
+    man: help
+    bs: bisect
+    # a common task !!
+    psom: push origin master
+    # diff and log helpers
+    staged: diff --cached
+    dfc: diff --cached
+    lg: log --graph --oneline
+    lgp: log --graph --pretty=tformat:'%C(yellow)%h%Creset%C(auto)%d%Creset %s %C(blue)(%an)%Creset %Cgreen(%cd - %cr)%Creset' --abbrev-commit --date=local
+    #lgp: log --graph --pretty=tformat:'%C(yellow)%h%Creset%C(yellow)%d%Creset %s %C(blue)(%an)%Creset %Cgreen(%cd - %cr)%Creset' --abbrev-commit --date=local
+    last: log -1 HEAD
+    tip: log -n 1 --abbrev-commit --decorate
+    changelog-html: log --no-merges --date=short --format='<li id=\"%h\"><time>%ad</time> %s</li>'
+    changelog-md-full:  log --no-merges --date=short --format='* %h %ad %s (%cN)'
+    changelog-md:  log --no-merges --date=short --format='* %ad %s'
+    # sudmodules management
+    subupdate: submodule update --init --recursive
+    subup: submodule update --init --recursive
+    cloner: clone --recursive
+    clr: clone --recursive
+    # add file to gitignore
+    ignore: '"!sh -c ''([ ! -e .gitignore ] && touch .gitignore) | echo $1 >> .gitignore'' -"'
+    # amend last not pushed commit
+    fix: commit --amend
+    amend: commit --amend
+    # remove files from staging area (files to be committed)
+    unstage: reset HEAD --
+    us: reset HEAD --
+    # discard changes (modified files but not to be committed)
+    undo: checkout --
+    discard: checkout --
+    ds: checkout --
+    un: checkout --
+    # git remove manually deleted files
+    rd: '!git ls-files -z --deleted | xargs -0 git rm'
+    cf: cat-file -p
+    # git 1.7 :  git upstream local_branch remote/branch
+    #upstream: branch --set-upstream
+    # git 1.8 : git upstream remote/branch local_branch
+    upstream: branch -u
+    pushtrack: push -u
+  push:  
+    # default: matching
+    default: upstream

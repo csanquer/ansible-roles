@@ -1,0 +1,13 @@
+---
+- name: copy sudoers file
+  template:
+    src: "etc/sudoers_{{ ansible_os_family|lower }}.j2"
+    dest: "/etc/sudoers"
+    validate: 'visudo -cf %s'
+
+- name: create sudoers.d files
+  template:
+    src: "etc/sudoers.j2"
+    dest: "/etc/sudoers.d/{{ item.prefix | default('00')}}_{{ item.sudogroup|default(item.sudouser) }}"
+    validate: 'visudo -cf %s'
+  with_items: "{{ sudo_files }}"

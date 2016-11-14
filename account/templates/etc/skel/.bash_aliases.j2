@@ -1,0 +1,8 @@
+#!/bin/sh
+# {{ ansible_managed }}
+{% for key,value in skel_default_bash_aliases.iteritems() %}
+alias {{ key }}='{{ value }}'
+{% endfor %}
+{% for key,value in skel_bash_aliases.iteritems() %}
+alias {{ key }}='{{ value }}'
+{% endfor %}

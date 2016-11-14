@@ -1,0 +1,2 @@
+# {{ ansible_managed }}
+{{ ('%' ~ item.sudogroup) if item.sudogroup|default(none) else item.sudouser }}  ALL = {{ ('(' ~ item.command_user ~ ') ') if item.command_user else '' }}{% if item.commands is defined and item.commands|length > 0 %}{{ item.commands|join(', ') }}{% endif %}{% if item.nopasswd_commands is defined and item.nopasswd_commands|length > 0 %}{{ ', ' if item.commands is defined and item.commands|length > 0 else '' }}NOPASSWD: {{ item.nopasswd_commands|join(', ') }}{% endif %}

@@ -1,0 +1,29 @@
+---
+- include: sudo.yml
+  tags:
+  - account
+  - user
+  - sudo
+  - sudoer
+
+- include: skel.yml
+  tags:
+  - account
+  - user
+  - skel
+
+- include: groups.yml
+  tags:
+  - account
+  - user
+
+- include: users.yml
+  tags:
+  - account
+  - user
+
+- include: ssh.yml
+  tags:
+  - account
+  - user
+  - sshkeys
