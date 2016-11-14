@@ -1,0 +1,5 @@
+---
+- include: debian_dependencies.yml
+- include: debian_sources_list.yml
+- include: debian_update.yml
+- include: debian_packages.yml
