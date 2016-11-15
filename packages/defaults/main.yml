@@ -99,6 +99,9 @@ apt_sources_lists_extra: []
     #             key_url:
     #             key_id:
 
+# apt update on boot
+apt_update_boot: false
+# full, dist or safe upgrade
 apt_update_cache_valid_time: 3600
 apt_upgrade_type: safe
 apt_upgrade: false
