@@ -1,1 +1,8 @@
 ---
+- name: create groups
+  group: 
+    name: "{{ item.key }}"
+    system: "{{ item.value.system | default('no') }}"
+    gid: "{{ item.value.gid|default(omit) }}"
+    state: present
+  with_dict: "{{ account_groups }}"

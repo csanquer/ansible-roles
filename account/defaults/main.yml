@@ -1,4 +1,86 @@
 ---
+account_groups: {}
+  # <group>:
+  #   gid:  
+  #   system: false
+
+account_users: {}
+  # <username>:
+  #   name: <username> # required
+  #   comment: # default = <username>
+  #   home: # default = /home/<username>
+  #   home_mode: #default = 'u=rwx,g=rx,o=rx'
+  #   home_owner: # default = <username>
+  #   home_group: # default = <username>
+  #   no_chown_home: false
+  #   system: no # is system user ?
+  #   group: # primary group, default = <username>
+  #   groups: [] # all user groups 
+  #   shell: # default = /bin/bash
+  #   uid: 
+  #   lock: false # lock password authentication : only ssh key authentication is allowed
+  #   salt: # password salt, default = None
+  #   config_files: []
+  #     # -
+  #     #   file: home/{{ ansible_os_family|lower }}/.bashrc.j2
+  #     #   dest: # default in /home/<username>/
+  #     #   owner: # default = <username>
+  #     #   group: # default = <username>
+  #     #   mode: # default = 'u=rw,g=r,o=r'
+  #     #   backup: yes
+  #     #   force: no
+  #     # -
+  #     #   file: home/.bash_aliases.j2
+  #     #   dest: # default in /home/<username>/
+  #     # -
+  #     #   file: home/.zshrc.j2
+  #     #   dest: # default in /home/<username>/
+  #   gitconfig:
+  #     - { name: 'user.name', option: 'Martin Dupond'}
+  #     - { name: 'user.email', option: 'martin.dupond@example.com'}
+  #  bash_aliases:
+  #     <alias>: <command>
+
+account_env_vars: {}
+  # <username>:
+  #   - 
+  #     shellrc: # default .bashrc
+  #     key: foo 
+  #     option: bar
+
+account_user_passwords: {}
+    # <username>: <password>
+
+# ssh key file in path  inventory_dir ~ '/' ~ ssh_public_keys_dir
+account_default_authorized_keys: {}
+  # <username>: 
+  #   - '<ssh-public-key1>'
+  #   - '<ssh-public-key2>'
+  #   - '<ssh-public-key3>'
+  #   - '<ssh-public-key4>'
+
+account_authorized_keys: {}
+  # <username>:
+  #   <ssh-public-key1>
+  #   <ssh-public-key2>
+  #   <ssh-public-key3>
+  #   <ssh-public-key4>
+
+account_ssh_keys_pairs: {}
+  # <username>:
+  #   -
+  #     # private ssh key path
+  #     file: # default = /home/<user>/.ssh/id_rsa
+  #     # public ssh key
+  #     public: 'xxxxxxxxxxxxxxxx' 
+  #     # private ssh key
+  #     private: |  
+  #       xxxxxxxxxxxxxx
+  #       xxxxxxxxxxxxxx
+  #       xxxxxxxxxxxxxx
+  #     owner: # default = <username>
+  #     group: # default = <username>
+
 sudo_cmd_aliases:
   SHELLS:    "/bin/sh, /bin/bash, /bin/dash, /usr/bin/rsh, /usr/bin/csh, /usr/bin/ksh, /usr/local/bin/tcsh, /usr/bin/zsh"
   SU:        "/bin/su"
@@ -8,11 +90,9 @@ sudo_files: []
   # - { sudogroup: 'admin', prefix: '01', command_user: 'ALL', nopasswd_commands: ['ALL'], commands: [] }
 
 
-skel_files: 
-  - { src: "etc/skel/{{ ansible_os_family|lower }}/" }
-  - { src: "etc/skel/.zshrc" }
-
 skel_templates: 
+  - { src: "etc/skel/{{ ansible_os_family|lower }}/" }
+  - { src: "etc/skel/.zshrc.j2" }
   - { src: "etc/skel/.bash_aliases.j2" }
 
 skel_default_bash_aliases:
@@ -99,12 +179,7 @@ skel_gitignore:
   - '*.geany'
   - '*~'
 
-
-
 skel_gitconfig:
-  user:
-    name:
-    email:
   color:
     ui: 'true'
   core:

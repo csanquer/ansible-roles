@@ -1,10 +1,4 @@
 ---
-- name: copy skeleton files
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest|default('/etc/skel/') }}"
-  with_items: "{{ skel_files }}"
-    
 - name: copy skeleton templates files
   template:
     src: "{{ item.src }}"
