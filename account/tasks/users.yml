@@ -43,15 +43,7 @@
     - "{{ account_users }}"
     - config_files
     - { skip_missing: True }
-  when: item.1.file is not none
-
-- name: configure custom environment variable
-  lineinfile:
-    dest: "{{ account_users[item.key]['home']|default('/home/' ~ item.key) }}/{{ item.value.shellrc|default('.bashrc') }}"
-    state: present
-    regexp: 'export {{ item.value.key }}=.*'
-    line: 'export {{ item.value.key }}={{ item.value.option }}'
-  with_dict: "{{ account_env_vars }}"
+  when: item.1.src is not none
 
 - name: set git configuration
   git_config: 

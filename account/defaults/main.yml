@@ -22,7 +22,7 @@ account_users: {}
   #   salt: # password salt, default = None
   #   config_files: []
   #     # -
-  #     #   file: home/{{ ansible_os_family|lower }}/.bashrc.j2
+  #     #   src: home/{{ ansible_os_family|lower }}/.bashrc.j2
   #     #   dest: # default in /home/<username>/
   #     #   owner: # default = <username>
   #     #   group: # default = <username>
@@ -30,10 +30,10 @@ account_users: {}
   #     #   backup: yes
   #     #   force: no
   #     # -
-  #     #   file: home/.bash_aliases.j2
+  #     #   src: home/.bash_aliases.j2
   #     #   dest: # default in /home/<username>/
   #     # -
-  #     #   file: home/.zshrc.j2
+  #     #   src: home/.zshrc.j2
   #     #   dest: # default in /home/<username>/
   #   gitconfig:
   #     - { name: 'user.name', option: 'Martin Dupond'}
@@ -43,10 +43,7 @@ account_users: {}
 
 account_env_vars: {}
   # <username>:
-  #   - 
-  #     shellrc: # default .bashrc
-  #     key: foo 
-  #     option: bar
+  #     <key>: <value>
 
 account_user_passwords: {}
     # <username>: <password>
@@ -91,7 +88,10 @@ sudo_files: []
 
 
 skel_templates: 
-  - { src: "etc/skel/{{ ansible_os_family|lower }}/" }
+  - { src: "etc/skel/{{ ansible_os_family|lower }}/.bash_logout.j2" }
+  - { src: "etc/skel/{{ ansible_os_family|lower }}/.bashrc.j2" }
+  - { src: "etc/skel/{{ ansible_os_family|lower }}/.bash_profile.j2", os_family: 'redhat' }
+  - { src: "etc/skel/{{ ansible_os_family|lower }}/.profile.j2", os_family: 'debian' }
   - { src: "etc/skel/.zshrc.j2" }
   - { src: "etc/skel/.bash_aliases.j2" }
 

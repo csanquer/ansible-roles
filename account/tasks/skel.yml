@@ -3,4 +3,5 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest|default('/etc/skel/') }}"
+  when: item.os_family|default(ansible_os_family)|lower == ansible_os_family|lower
   with_items: "{{ skel_templates }}"

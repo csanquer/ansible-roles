@@ -6,8 +6,8 @@ alias {{ key }}='{{ value }}'
 {% for key,value in skel_bash_aliases.iteritems() %}
 alias {{ key }}='{{ value }}'
 {% endfor %}
-{% if item.0.value.bash_aliases is defined  %}
-{%   for key,value in item.0.value.bash_aliases.iteritems() %}
+{% if item.0.bash_aliases is defined  %}
+{%   for key,value in item.0.bash_aliases.iteritems() %}
 alias {{ key }}='{{ value }}'
 {%   endfor %}
 {% endif %}

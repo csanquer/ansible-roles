@@ -11,19 +11,19 @@
 
 - name: create ssh keys directory for keys to copy
   file:
-    path: {{ (item.value.file|default('/home/' ~ item.key ~ '/.ssh/id_rsa'))|dirname }}
+    path: "{{ (item.value.file|default('/home/' ~ item.key ~ '/.ssh/id_rsa'))|dirname }}"
     state: directory
     mode: 'u=rwX,g=r,o='
-    owner: {{ item.value.owner|default(item.key) }}
-    group: {{ item.value.group|default(item.key) }}
+    owner: "{{ item.value.owner|default(item.key) }}"
+    group: "{{ item.value.group|default(item.key) }}"
   with_dict: "{{ account_ssh_keys_pairs }}"
 
 - name: copy ssh public keys
   copy:
     content: '{{ item.value.public|trim }}'
-    dest: {{ (item.value.file|default('/home/' ~ item.key ~ '/.ssh/id_rsa')) ~ '.pub' }}
-    owner: {{ item.value.owner|default(item.key) }}
-    group: {{ item.value.group|default(item.key) }}
+    dest: "{{ (item.value.file|default('/home/' ~ item.key ~ '/.ssh/id_rsa')) ~ '.pub' }}"
+    owner: "{{ item.value.owner|default(item.key) }}"
+    group: "{{ item.value.group|default(item.key) }}"
     mode: 'u=rw,g=r,o='
     backup: no
     force: yes
@@ -32,9 +32,9 @@
 - name: copy ssh private keys
   copy:
     content: '{{ item.value.private|trim ~ "\n" }}'
-    dest: {{ (item.value.file|default('/home/' ~ item.key ~ '/.ssh/id_rsa')) }}
-    owner: {{ item.value.owner|default(item.key) }}
-    group: {{ item.value.group|default(item.key) }}
+    dest: "{{ (item.value.file|default('/home/' ~ item.key ~ '/.ssh/id_rsa')) }}"
+    owner: "{{ item.value.owner|default(item.key) }}"
+    group: "{{ item.value.group|default(item.key) }}"
     mode: 'u=rw,g=,o='
     backup: no
     force: yes

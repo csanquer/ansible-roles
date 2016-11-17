@@ -8,6 +8,6 @@
 - name: create sudoers.d files
   template:
     src: "etc/sudoers.j2"
-    dest: "/etc/sudoers.d/{{ item.prefix | default('00')}}_{{ item.sudogroup|default(item.sudouser) }}"
+    dest: "/etc/sudoers.d/{{ (item.prefix ~ '_') if item.prefix is defined and item.prefix else '' }}{{ item.sudogroup|default(item.sudouser) }}"
     validate: 'visudo -cf %s'
   with_items: "{{ sudo_files }}"

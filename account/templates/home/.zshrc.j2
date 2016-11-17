@@ -41,7 +41,9 @@ else
     PROMPT="%{$fg_bold[cyan]%}%n%{$fg_bold[white]%}@%{$fg_bold[green]%}%M%{$fg_bold[white]%}:%{$fg_bold[magenta]%}%~%{$reset_color%} \$(git_super_status)"$'\n'"%t %{$fg_bold[cyan]%}%#%{$reset_color%} "
 fi
 
+{% if item.0.name is defined %}
 # environment variables
-{% for env_item in account_env_vars %}
-export {{ env_item.key|upper }}="{{ env_item.option }}"
-{% endfor %}
+{%   for key,value in account_env_vars[item.0.name].iteritems() %}
+export {{ key|upper }}="{{ value }}"
+{%   endfor %}
+{% endif %}

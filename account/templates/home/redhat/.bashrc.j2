@@ -26,7 +26,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+{% if item.0.name is defined %}
 # environment variables
-{% for env_item in account_env_vars %}
-export {{ env_item.key|upper }}="{{ env_item.option }}"
-{% endfor %}
+{%   for key,value in account_env_vars[item.0.name].iteritems() %}
+export {{ key|upper }}="{{ value }}"
+{%   endfor %}
+{% endif %}
