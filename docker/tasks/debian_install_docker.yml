@@ -1,10 +1,15 @@
 ---
 - name: add docker repository GPG key
-  apt_key: keyserver="{{ docker_apt_keyserver }}" id="{{ docker_apt_key_id }}"
+  apt_key: 
+    keyserver: "{{ docker_apt_keyserver }}"
+    id: "{{ docker_apt_key_id }}"
   when: ansible_lsb.id == 'Debian' or ansible_lsb.id == 'Ubuntu'
 
 - name: add docker main repository
-  apt_repository: repo="deb {{ docker_apt_url }} {{ ansible_lsb.id|lower }}-{{ ansible_lsb.codename|lower }} {{ docker_repo_branch|default('main') }}" state=present filename="docker_official"
+  apt_repository: 
+    repo: "deb {{ docker_apt_url }} {{ ansible_lsb.id|lower }}-{{ ansible_lsb.codename|lower }} {{ docker_repo_branch|default('main') }}"
+    state: present 
+    filename: "docker_official"
   when: ansible_lsb.id == 'Debian' or ansible_lsb.id == 'Ubuntu'
   register: docker_apt_result
 
@@ -16,15 +21,17 @@
     mode: 'u=rw,g=r,o=r'
 
 - name: apt update list for new docker repository
-  apt: update_cache=yes
+  apt: 
+    update_cache: yes
   when: docker_apt_result.changed
 
 - name: install docker dependencies
-  apt: name={{ item }} state=present
-  with_items:
-  - acl
-  - cgroup-lite
-  - apparmor
-
+  apt: 
+    name: "{{ item }}" 
+    state: present
+  with_items: "{{ docker_debian_dependencies }}"
+  
 - name: install docker engine
-  apt: name=docker-engine state={{ docker_state}}
+  apt: 
+    name: docker-engine 
+    state: "{{ docker_state}}"
