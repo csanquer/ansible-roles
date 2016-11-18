@@ -1,0 +1,11 @@
+---
+- name: update network interfaces
+  template: 
+    src: interfaces.j2
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: 644
+    backup: yes
+  when: network_interfaces_reconfigure
+  notify: restart network

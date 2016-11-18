@@ -1,0 +1,11 @@
+---
+- name: update resolv.conf
+  template: 
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    mode: 644
+    backup: yes
+  when: network_dns_resolv_reconfigure
+  notify: restart network

@@ -1,0 +1,8 @@
+---
+- include: configure_interfaces.yml
+  tags:
+  - network
+
+- include: configure_dns_resolv.yml
+  tags:
+  - network

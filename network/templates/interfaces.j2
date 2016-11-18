@@ -1,0 +1,26 @@
+# {{ ansible_managed }}
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+{% for name, item in network_interfaces|dictsort %}
+{%   if item.comment is defined and item.comment %}
+# {{ item.comment }}
+{%   endif%}
+auto {{ name }}
+{%   for allowed in item.allow %}
+allow-{{ allowed }} {{ name }}
+{%   endfor %}
+iface {{ name }} inet {{ item.type }}
+{%   for key,value in item.options.iteritems() %}
+{{ key }} {{ value|join(', ') if value is iterable else value }}
+{%   endfor %}
+{%   for key,value in item.general_options.iteritems() %}
+{{ key }} {{ value|join(', ') if value is iterable else value }}
+{%   endfor %}
+{% endfor %}

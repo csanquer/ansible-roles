@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+{% if network_resolv_domain is defined and network_resolv_domain != '' and network_resolv_domain is not none %}
+domain {{ network_resolv_domain }}
+{% endif %}
+{% if network_resolv_search is defined and network_resolv_search != '' and network_resolv_search is not none %}
+search {{ network_resolv_search }}
+{% endif %}
+{% for item in network_resolv_nameservers %}
+nameserver {{ item }}
+{% endfor %}
