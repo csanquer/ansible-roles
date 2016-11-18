@@ -1,0 +1,14 @@
+---
+- include: install_debian.yml
+  when: ansible_os_family == 'Debian'
+  tags:
+  - sshd
+
+- include: install_redhat.yml
+  when: ansible_os_family == 'RedHat'
+  tags:
+  - sshd
+
+- include: copy.yml
+  tags:
+  - sshd
