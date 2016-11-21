@@ -1,0 +1,74 @@
+---
+- name: preconfigure tzdata
+  debconf:
+    name: tzdata
+    question: 'tzdata/{{ item.question }}'
+    value: '{{ item.values }}'
+    vtype: '{{ item.type }}'
+  with_items:
+      - { question: 'Zones/Europe', values: 'Paris', type: 'select' }
+      - { question: 'Areas', values: 'Europe', type: 'select' }
+
+- name: preconfigure locales
+  debconf:
+    name: locales
+    question: 'locales/{{ item.question }}'
+    value: '{{ item.values }}'
+    vtype: '{{ item.type }}'
+  with_items:
+      - { question: 'default_environment_locale', values: 'fr_FR.UTF-8', type: 'select' }
+      - { question: 'locales_to_be_generated', values: 'en_US.UTF-8 UTF-8, fr_FR.UTF-8 UTF-8', type: 'multiselect' }
+
+- name: configure timezone
+  template:
+    src: timezone.j2
+    dest: /etc/timezone
+    owner: root
+    group: root
+    mode: 0644
+
+- name: configure default locale
+  template:
+    src: locale.j2
+    dest: /etc/default/locale
+    owner: root
+    group: root
+    mode: 0644
+
+- name: install locales packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - tzdata
+  - locales
+
+- name: reconfigure locales packages
+  command: dpkg-reconfigure --frontend noninteractive {{ item }}
+  with_items:
+    - tzdata
+    - locales
+
+- name: generate locales
+  locale_gen:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ locale_generate }}"
+  notify: run locale-gen
+
+- name: configure system bashrc
+  lineinfile:
+    dest: /etc/bash.bashrc
+    state: present
+    regexp: 'export {{ item.key|upper }}: .*'
+    line: 'export {{ item.key|upper }}: {{ item.value }}'
+  with_dict: "{{ locale_env }}"
+  when: item.value is not none and item.value !:  ''
+
+- name: reconfigure default keyboard layout
+  lineinfile:
+    dest: /etc/default/keyboard
+    state: present
+    regexp: 'XKBLAYOUT=".*"'
+    line: 'XKBLAYOUT="{{ keyboard_layout_code }}"'
+  when: keyboard_layout_reconfigure

@@ -1,0 +1,6 @@
+---
+- name: configure timezone
+  command: timedatectl set-timezone {{ locale_timezone|default('Europe/Paris') }}
+
+- name: configure default locale
+  command: localectl set-locale LANG={{ locale_env.lang|default('fr_FR.utf8') }}

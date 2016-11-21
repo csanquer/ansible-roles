@@ -1,0 +1,33 @@
+---
+locale_generate:
+    - "en_US.UTF-8"
+    - "fr_FR.UTF-8"
+
+locale_timezone_continent: Europe
+locale_timezone_country: Paris
+locale_timezone: "{{ locale_timezone_continent }}{{ ('/' ~ locale_timezone_country) if locale_timezone_country else ''}}"
+
+locale_default_lang: fr_FR
+locale_default_charset: UTF-8
+
+locale_env:
+  lang: "{{ locale_default_lang }}.{{ locale_default_charset }}"
+  language: "{{ locale_default_lang }}.{{ locale_default_charset }}"
+  lc_all: "{{ locale_default_lang }}.{{ locale_default_charset }}"
+  lc_address: ~
+  lc_collate: "C"
+  lc_ctype: ~
+  lc_identification: ~
+  lc_measurement: ~
+  lc_messages: ~
+  lc_monetary: ~
+  lc_name: ~
+  lc_numeric: ~
+  lc_paper: ~
+  lc_telephone: ~
+  lc_time: ~
+  locpath: ~
+
+keyboard_layout_reconfigure: true
+keyboard_layout_code: us
+# keyboard_layout_code: fr
