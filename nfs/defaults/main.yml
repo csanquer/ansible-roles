@@ -1,0 +1,22 @@
+---
+nfs_exports_enabled: false
+nfs_exports: []
+  # -
+  #   path:
+  #   default_options: []
+  #   clients:
+  #     -
+  #       host:
+  #       options: []
+
+nfs_mount_enabled: false
+
+nfs_mount_points: []
+  # -
+  #   src: <nfs-server-ip>:<nfs-server-path>
+  #   path: <mount-point>
+  #   mount_opts:  auto,nofail,noatime,nolock,intr,tcp,actimeo=1800
+  #   mount_mode: 'u=rwx,g=rx,o=rx'
+  #   mount_owner: root
+  #   mount_group: root
+  #   state: mounted

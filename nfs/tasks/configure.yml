@@ -1,0 +1,39 @@
+---
+- name: configure NFS exports
+  template:
+    src: etc/exports.j2
+    dest: /etc/exports
+  when: nfs_exports_enabled
+  notify:
+    - restart nfs server
+
+- name: create NFS mount point directory
+  file:
+    path: "{{ item.path }}"
+    mode: "{{ item.mount_mode|default('u=rwx,g=rx,o=rx') }}"
+    owner: "{{ item.mount_owner|default('root') }}"
+    group: "{{ item.mount_group|default('root') }}"
+    state: directory
+  when: nfs_mount_enabled and item.path is not none and item.path != ""
+  with_items: "{{ nfs_mount_points }}"
+
+- name: create NFS mount entries in fstab
+  mount:
+    src: "{{ item.src }}"
+    name: "{{ item.path }}"
+    fstype: nfs
+    opts: "{{ item.item.mount_opts|default(omit) }}"
+    state: "{{ item.item.state|default('mounted') }}"
+  when: nfs_mount_enabled and item.path is not none and item.path != ""
+  register: disks_mount_results
+  with_items: "{{ nfs_mount_points }}"
+
+- name: set permissions on NFS mount point directory
+  file:
+    path: "{{ item.path }}"
+    mode: "{{ item.mount_mode|default('u=rwx,g=rx,o=rx') }}"
+    owner: "{{ item.mount_owner|default('root') }}"
+    group: "{{ item.mount_group|default('root') }}"
+    state: directory
+  when: nfs_mount_enabled and item.path is not none and item.path != ""
+  with_items: "{{ nfs_mount_points }}"
