@@ -1,0 +1,9 @@
+---
+- include: install_debian.yml
+  when: ansible_os_family == 'Debian'
+  tags:
+    - samba
+
+- include: configure.yml
+  tags:
+    - samba

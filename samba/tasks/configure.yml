@@ -1,0 +1,17 @@
+---
+- name: configure Samba
+  template:
+    src: etc/smb.conf.j2
+    dest: /etc/samba/smb.conf
+    validate: 'testparm -s %s'
+  notify:
+    - restart samba server
+
+- name: create Samba users
+  shell: >
+    (pdbedit -L | grep {{ item.key }} 2>&1 > /dev/null) \
+    || (echo {{ item.value }}; echo {{ item.value }}) \
+    | smbpasswd -s -a {{ item.key }}
+  with_dict: "{{ samba_users }}"
+  register: samba_create_user_output
+  changed_when: "'Added user' in samba_create_user_output.stdout"
