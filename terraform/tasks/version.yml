@@ -1,0 +1,10 @@
+---
+- name: get installed terraform version
+  shell: "terraform version | sed -e 's/Terraform v//'"
+  register: terraform_version_result
+  ignore_errors: yes
+
+- name: set terraform version fact
+  set_fact:
+      terraform_current_version: "{{ terraform_version_result.stdout|default('') }}"
+  register: terraform_fact_result

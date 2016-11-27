@@ -1,2 +1,3 @@
 ---
+terraform_current_version:
 terraform_base_url: https://releases.hashicorp.com/terraform

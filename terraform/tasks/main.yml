@@ -1,4 +1,8 @@
 ---
+- include: version.yml
+  tags:
+    - terraform
+
 - include: install.yml
   tags:
     - terraform
