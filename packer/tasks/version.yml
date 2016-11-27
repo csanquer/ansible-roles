@@ -1,0 +1,10 @@
+---
+- name: get installed packer version
+  shell: "packer version | sed -e 's/Packer v//'"
+  register: packer_version_result
+  ignore_errors: yes
+
+- name: set packer version fact
+  set_fact:
+      packer_current_version: "{{ packer_version_result.stdout|default('') }}"
+  register: packer_fact_result
