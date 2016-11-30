@@ -7,7 +7,7 @@
     vtype: "{{ item.type }}"
   with_items:
       - { question: "Zones/{{ locale_timezone_continent|default('Etc') }}", values: "{{ locale_timezone_city|default('UTC') }}", type: 'select' }
-      - { question: 'Areas', values: 'Etc', type: 'select' }
+      - { question: 'Areas', values: "{{ locale_timezone_continent|default('Etc') }}", type: 'select' }
 
 - name: preconfigure locales
   debconf:
@@ -18,6 +18,20 @@
   with_items:
       - { question: 'default_environment_locale', values: "{{ locale_default_lang|default('en_US') }}.{{ locale_default_charset|default('UTF-8') }}", type: 'select' }
       - { question: 'locales_to_be_generated', values: "en_US.UTF-8 UTF-8", type: 'multiselect' }
+
+- name: install locales packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - tzdata
+    - locales
+
+- name: reconfigure locales packages
+  command: dpkg-reconfigure --frontend noninteractive {{ item }}
+  with_items:
+    - tzdata
+    - locales
 
 - name: configure timezone
   template:
@@ -34,20 +48,6 @@
     owner: root
     group: root
     mode: 0644
-
-- name: install locales packages
-  apt:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-    - tzdata
-    - locales
-
-- name: reconfigure locales packages
-  command: dpkg-reconfigure --frontend noninteractive {{ item }}
-  with_items:
-    - tzdata
-    - locales
 
 - name: generate locales
   locale_gen:

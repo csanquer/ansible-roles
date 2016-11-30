@@ -10,8 +10,6 @@ locale_generate:
 locale_timezone_continent: Etc
 locale_timezone_city: UTC
 
-locale_timezone: "{{ locale_timezone_continent }}{{ ('/' ~ locale_timezone_city) if locale_timezone_city else ''}}"
-
 locale_default_lang: en_US
 locale_default_charset: UTF-8
 
