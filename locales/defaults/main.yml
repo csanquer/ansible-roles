@@ -1,13 +1,18 @@
 ---
 locale_generate:
-    - "en_US.UTF-8"
-    - "fr_FR.UTF-8"
+  -
+    lang: 'en_US'
+    charset: 'UTF-8'
+  # -
+  #   lang: 'fr_FR'
+  #   charset: 'UTF-8'
 
-locale_timezone_continent: Europe
-locale_timezone_country: Paris
-locale_timezone: "{{ locale_timezone_continent }}{{ ('/' ~ locale_timezone_country) if locale_timezone_country else ''}}"
+locale_timezone_continent: Etc
+locale_timezone_city: UTC
 
-locale_default_lang: fr_FR
+locale_timezone: "{{ locale_timezone_continent }}{{ ('/' ~ locale_timezone_city) if locale_timezone_city else ''}}"
+
+locale_default_lang: en_US
 locale_default_charset: UTF-8
 
 locale_env:
