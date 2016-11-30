@@ -1,0 +1,9 @@
+---
+- name: install Samba packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - samba-common
+    - samba
+    - samba-client
