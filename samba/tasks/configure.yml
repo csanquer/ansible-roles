@@ -4,8 +4,9 @@
     src: etc/smb.conf.j2
     dest: /etc/samba/smb.conf
     validate: 'testparm -s %s'
+    backup: yes
   notify:
-    - restart samba server
+    - restart debian samba server
 
 - name: create Samba users
   shell: >

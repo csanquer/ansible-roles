@@ -3,3 +3,8 @@
   service:
     name: samba
     state: restarted
+
+- name: restart debian samba server
+  service:
+    name: smbd
+    state: restarted
