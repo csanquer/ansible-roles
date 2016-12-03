@@ -1,4 +1,13 @@
 ---
+- name: create samba share directories
+  file:
+    path: "{{ item.path }}"
+    mode: "{{ item.mode|default('u=rwx,g=rx,o=rx') }}"
+    owner: "{{ item.owner|default(omit) }}"
+    group: "{{ item.group|default(omit) }}"
+    state: directory
+  with_items: "{{ samba_shares }}"
+
 - name: configure Samba
   template:
     src: etc/smb.conf.j2
