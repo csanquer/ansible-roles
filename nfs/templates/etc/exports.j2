@@ -8,6 +8,6 @@
 # Example for NFSv4:
 # /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
 # /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
-{% for share in exports %}
-{{ share.path }}    {{ ('-' ~ (share.default_options.join(',')) ~ ' ') if share.default_options else '' }}{% for client in share.clients%}{{ client.host }}{{ '(' ~ client.options.join(',') ~ ')' if client.options else '' }}{% endfor %}
+{% for share in nfs_exports %}
+{{ share.path }}    {{ ('-' ~ (share.default_options|join(',')) ~ ' ') if share.default_options else '' }}{% for client in share.clients%}{{ client.host }}{{ '(' ~ client.options|join(',') ~ ')' if client.options else '' }}{% endfor %}
 {% endfor %}
