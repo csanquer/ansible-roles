@@ -1,7 +1,7 @@
 ---
 account_groups: {}
   # <group>:
-  #   gid:  
+  #   gid:
   #   system: false
 
 account_users: {}
@@ -15,9 +15,9 @@ account_users: {}
   #   no_chown_home: false
   #   system: no # is system user ?
   #   group: # primary group, default = <username>
-  #   groups: [] # all user groups 
+  #   groups: [] # all user groups
   #   shell: # default = /bin/bash
-  #   uid: 
+  #   uid:
   #   lock: false # lock password authentication : only ssh key authentication is allowed
   #   salt: # password salt, default = None
   #   config_files: []
@@ -50,7 +50,7 @@ account_user_passwords: {}
 
 # ssh key file in path  inventory_dir ~ '/' ~ ssh_public_keys_dir
 account_default_authorized_keys: {}
-  # <username>: 
+  # <username>:
   #   - '<ssh-public-key1>'
   #   - '<ssh-public-key2>'
   #   - '<ssh-public-key3>'
@@ -58,10 +58,19 @@ account_default_authorized_keys: {}
 
 account_authorized_keys: {}
   # <username>:
-  #   <ssh-public-key1>
-  #   <ssh-public-key2>
-  #   <ssh-public-key3>
-  #   <ssh-public-key4>
+  #   - '<ssh-public-key1>'
+  #   - '<ssh-public-key2>'
+  #   - '<ssh-public-key3>'
+  #   - '<ssh-public-key4>'
+
+account_url_authorized_keys: []
+  # -
+  #   names: <username>
+  #   urls:
+  #     - '<ssh-public-key1-url>'
+  #     - '<ssh-public-key2-url>'
+  #     - '<ssh-public-key3-url>'
+  #     - '<ssh-public-key4-url>'
 
 account_ssh_keys_pairs: {}
   # <username>:
@@ -69,9 +78,9 @@ account_ssh_keys_pairs: {}
   #     # private ssh key path
   #     file: # default = /home/<user>/.ssh/id_rsa
   #     # public ssh key
-  #     public: 'xxxxxxxxxxxxxxxx' 
+  #     public: 'xxxxxxxxxxxxxxxx'
   #     # private ssh key
-  #     private: |  
+  #     private: |
   #       xxxxxxxxxxxxxx
   #       xxxxxxxxxxxxxx
   #       xxxxxxxxxxxxxx
@@ -87,7 +96,7 @@ sudo_files: []
   # - { sudogroup: 'admin', prefix: '01', command_user: 'ALL', nopasswd_commands: ['ALL'], commands: [] }
 
 
-skel_templates: 
+skel_templates:
   - { src: "etc/skel/{{ ansible_os_family|lower }}/.bash_logout.j2" }
   - { src: "etc/skel/{{ ansible_os_family|lower }}/.bashrc.j2" }
   - { src: "etc/skel/{{ ansible_os_family|lower }}/.bash_profile.j2", os_family: 'redhat' }
@@ -156,7 +165,7 @@ skel_default_bash_aliases:
 skel_bash_aliases: {}
 
 
-skel_gitignore: 
+skel_gitignore:
   - '.svn'
   - '_svn'
   - '.CVS'
@@ -255,6 +264,6 @@ skel_gitconfig:
     # git 1.8 : git upstream remote/branch local_branch
     upstream: branch -u
     pushtrack: push -u
-  push:  
+  push:
     # default: matching
     default: upstream
