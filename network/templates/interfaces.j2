@@ -18,9 +18,9 @@ allow-{{ allowed }} {{ name }}
 {%   endfor %}
 iface {{ name }} inet {{ item.type }}
 {%   for key,value in item.options.iteritems() %}
-{{ key }} {{ value|join(', ') if value is iterable else value }}
+{{ key }} {{ value|join(', ') if value is mapping else value }}
 {%   endfor %}
 {%   for key,value in item.general_options.iteritems() %}
-{{ key }} {{ value|join(', ') if value is iterable else value }}
+{{ key }} {{ value|join(', ') if value is mapping else value }}
 {%   endfor %}
 {% endfor %}
