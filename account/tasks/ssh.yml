@@ -14,7 +14,7 @@
     user: "{{ item.0.name }}"
     key: "{{ item.1 }}"
     state: present
-  with_nested:
+  with_subelements:
     - "{{ account_url_authorized_keys }}"
     - urls
 
