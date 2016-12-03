@@ -1,4 +1,10 @@
 ---
+network_hostname:
+network_hosts: []
+  # -
+  #   ip:
+  #   names: []
+
 network_resolv_domain:
 network_resolv_search:
 network_resolv_nameservers:
@@ -10,7 +16,7 @@ network_dns_resolv_reconfigure: true
 network_interfaces:
     eth0:
         comment: The primary network interface
-        general_options: 
+        general_options:
           'pre-up': 'sleep 2'
         allow:
           - hotplug
@@ -22,11 +28,11 @@ network_interfaces:
     #     allow:
     #       - hotplug
     #     type: static
-    #     options: 
-    #       address: 
+    #     options:
+    #       address:
     #       netmask: 255.255.255.0
-    #       network: 
-    #       broadcast: 
-    #       gateway: 
+    #       network:
+    #       broadcast:
+    #       gateway:
     #       'dns-nameservers': [ '8.8.8.8', '8.8.4.4' ]
-    #       'dns-search': 
+    #       'dns-search':

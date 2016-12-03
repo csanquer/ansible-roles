@@ -1,0 +1,13 @@
+---
+- name: set hostname
+  hostname:
+    name: "{{ network_hostname|default(ansible_hostname) }}"
+
+- name: configure hosts
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 644
+    backup: yes

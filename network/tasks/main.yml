@@ -1,4 +1,8 @@
 ---
+- include: configure_hosts.yml
+  tags:
+  - network
+
 - include: configure_interfaces.yml
   tags:
   - network
