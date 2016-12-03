@@ -15,7 +15,7 @@
     validate: 'testparm -s %s'
     backup: yes
   notify:
-    - restart debian samba server
+    - restart samba server
 
 - name: create Samba users
   shell: >

@@ -260,28 +260,28 @@
 # to the drivers directory for these users to have write rights in it
 ;   write list = root, @lpadmin
 
-{% if samba_shares|length > 0 %}
+{% if samba_shares|length() > 0 %}
 ## Shared directories
-{% for share in samba_shares %}
+{%   for share in samba_shares %}
 [{{ share.name }}]
-{% if share.comment is defined %}
+{%     if share.comment is defined %}
   comment = {{ share.comment }}
-{% endif %}
+{%     endif %}
   path = {{ share.path }}
   public = {{ share.public|default('no') }}
-{% if share.valid_users is defined %}
+{%     if share.valid_users is defined %}
   valid users= {{ share.valid_users }}
-{% endif %}
-{% if share.write_list is defined %}
+{%     endif %}
+{%     if share.write_list is defined %}
   write list = {{ share.write_list }}
-{% endif %}
-{% if share.group is defined %}
+{%     endif %}
+{%     if share.group is defined %}
   force group = {{ share.group }}
-{% endif %}
+{%     endif %}
   create mode = {{ share.create_mode|default('0664') }}
   force create mode = {{ share.force_create_mode|default('0664') }}
   directory mode = {{ share.directory_mode|default('0775') }}
   force directory mode = {{ share.force_directory_mode|default('0775') }}
 
-{% endfor %}
+{%   endfor %}
 {% endif%}
