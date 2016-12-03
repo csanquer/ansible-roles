@@ -12,6 +12,7 @@ network_resolv_nameservers:
     - '8.8.4.4'
 
 network_interfaces_reconfigure: false
+network_interfaces_restart: true
 network_dns_resolv_reconfigure: true
 network_interfaces:
     eth0:
