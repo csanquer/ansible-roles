@@ -5,6 +5,7 @@ network_hosts: []
   #   ip:
   #   names: []
 
+network_dns_resolv_reconfigure: true
 network_resolv_domain:
 network_resolv_search:
 network_resolv_nameservers:
@@ -13,7 +14,6 @@ network_resolv_nameservers:
 
 network_interfaces_reconfigure: false
 network_interfaces_restart: true
-network_dns_resolv_reconfigure: true
 network_interfaces:
     eth0:
         comment: The primary network interface

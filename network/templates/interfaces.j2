@@ -13,14 +13,15 @@ iface lo inet loopback
 # {{ item.comment }}
 {%   endif%}
 auto {{ name }}
-{%   for allowed in item.allow %}
+{%   for allowed in item.allow|default([]) %}
 allow-{{ allowed }} {{ name }}
 {%   endfor %}
-iface {{ name }} inet {{ item.type }}
-{%   for key,value in item.options.iteritems() %}
-{{ key }} {{ value|join(', ') if value is mapping else value }}
+iface {{ name }} inet {{ item.type|default('dhcp') }}
+{%   for key,value in (item.options|default({})).iteritems() %}
+      {{ key }} {{ value|join(', ') if value is mapping else value }}
 {%   endfor %}
-{%   for key,value in item.general_options.iteritems() %}
-{{ key }} {{ value|join(', ') if value is mapping else value }}
+{%   for key,value in (item.general_options|default({})).iteritems() %}
+      {{ key }} {{ value|join(', ') if value is mapping else value }}
 {%   endfor %}
+
 {% endfor %}
