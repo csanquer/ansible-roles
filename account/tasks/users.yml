@@ -14,7 +14,7 @@
 
 # add a ! at the beginning of hashed password to lock it
 - name: set user password
-  user: 
+  user:
     name: "{{ item.value.name }}"
     password: "{{ ('!' if item.value.lock|default(false) else '' ) ~ (account_user_passwords[item.value.name] |password_hash('sha512', item.value.salt|default(None))) }}"
   when: not item.value.no_password|default(false)
@@ -46,13 +46,21 @@
   when: item.1.src is not none
 
 - name: set git configuration
-  git_config: 
+  git_config:
     name: "{{ item.1.name }}"
     value: "{{ item.1.option }}"
-    scope: global 
+    scope: global
   become: true
   become_user:  "{{ item.0.name }}"
   with_subelements:
     - "{{ account_users }}"
     - gitconfig
     - { skip_missing: True }
+
+- name: get git bash prompt
+  git:
+    repo: "{{ account_git_bash_prompt_repo_url }}"
+    dest: /opt/bash-git-prompt
+    version: master
+    depth: 1
+    update: no
