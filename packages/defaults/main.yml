@@ -124,7 +124,7 @@ apt_default_packages:
   - rsync
   - ncftp
   - rsync
-  - unzip 
+  - unzip
   - zip
   - p7zip
   - p7zip-full
@@ -159,5 +159,5 @@ apt_extra_packages: []
   # - git-doc
 
 # list of packages to remove
-apt_remove_packages: 
+apt_remove_packages:
   - vim-tiny
