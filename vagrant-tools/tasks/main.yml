@@ -1,0 +1,10 @@
+---
+- include: install.yml
+  tags:
+    - vagrant-tools
+    - vagrant
+
+- include: configure.yml
+  tags:
+  - vagrant-tools
+  - vagrant
