@@ -1,3 +1,5 @@
 ---
 - name: install RedHat lsb-release
-  yum: name=redhat-lsb state=latest
+  yum:
+    name: redhat-lsb
+    state: latest
