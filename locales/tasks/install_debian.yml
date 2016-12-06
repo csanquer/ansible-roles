@@ -27,12 +27,6 @@
     - tzdata
     - locales
 
-- name: reconfigure locales packages
-  command: dpkg-reconfigure --frontend noninteractive {{ item }}
-  with_items:
-    - tzdata
-    - locales
-
 - name: configure timezone
   template:
     src: timezone.j2
@@ -40,6 +34,15 @@
     owner: root
     group: root
     mode: 0644
+
+- name: configure timezone for localtime
+  file:
+    src: "/usr/share/zoneinfo/{{ locale_timezone_continent|default('Etc') }}/{{ locale_timezone_city|default('UTC') }}"
+    dest: /etc/localtime
+    owner: root
+    group: root
+    state: link
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version|version_compare('14.04', '>=')
 
 - name: configure default locale
   template:
@@ -54,7 +57,12 @@
     name: "{{ item.lang }}.{{ item.charset }}"
     state: present
   with_items: "{{ locale_generate }}"
-  notify: run locale-gen
+
+- name: reconfigure locales packages
+  command: dpkg-reconfigure --frontend noninteractive {{ item }}
+  with_items:
+    - tzdata
+    - locales
 
 - name: configure system bashrc
   lineinfile:
