@@ -17,7 +17,7 @@
   user:
     name: "{{ item.value.name }}"
     password: "{{ ('!' if item.value.lock|default(false) else '' ) ~ (account_user_passwords[item.value.name] |password_hash('sha512', item.value.salt|default(None))) }}"
-  when: not item.value.no_password|default(false)
+  when: not item.value.no_password|default(false) and account_user_passwords[item.value.name] is defined
   with_dict: "{{ account_users }}"
 
 - name: chmod homes

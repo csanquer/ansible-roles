@@ -5,7 +5,7 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-force_color_prompt=yes
+force_color_prompt={{ 'yes' if (item.0.color_prompt|default(true)|bool) else ''}}
 
 if [ "$force_color_prompt" = yes ]; then
    if [ $UID -eq 0 ]; then
@@ -47,7 +47,7 @@ source /opt/bash-git-prompt/gitprompt.sh
 
 # SSH Agent auto start on session opening
 # set to yes to enable
-ssh_agent_autostart=
+ssh_agent_autostart={{ 'yes' if (item.0.ssh_agent_autostart|default(false)|bool) else ''}}
 
 if [ "$ssh_agent_autostart" = yes ]; then
     SSH_ENV="$HOME/.ssh/environment"
@@ -75,7 +75,7 @@ fi
 
 {% if item.0.name is defined %}
 # environment variables
-{%   for key,value in account_env_vars[item.0.name].iteritems() %}
+{%   for key,value in (account_env_vars[item.0.name]|default({})).iteritems() %}
 export {{ key|upper }}="{{ value }}"
 {%   endfor %}
 {% endif %}
