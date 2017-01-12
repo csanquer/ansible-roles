@@ -3,8 +3,7 @@
   pip:
     executable: "{{ python_2_pip_bin|default('pip') }}"
     name: docker-compose
-    extra_args: "{{ '-U' if docker_compose_state == 'latest' else '' }}"
-    state: present
+    state: "{{ docker_compose_state }}"
 
 - name: get docker compose version
   shell: "docker-compose --version | awk 'NR==1{print $NF}'"
