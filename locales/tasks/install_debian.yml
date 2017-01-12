@@ -68,8 +68,9 @@
   lineinfile:
     dest: /etc/bash.bashrc
     state: present
-    regexp: "export {{ item.key|upper }}: .*"
+    regexp: "export {{ item.key|upper }}=.*"
     line: "export {{ item.key|upper }}='{{ item.value }}'"
+    backup: yes
   with_dict: "{{ locale_env }}"
   when: item.value is not none and item.value != ''
 
