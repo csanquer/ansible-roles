@@ -1,12 +1,21 @@
 ---
+- name: get git bash prompt
+  git:
+    repo: "{{ account_git_bash_prompt_repo_url }}"
+    dest: /opt/bash-git-prompt
+    version: master
+    depth: 1
+    update: no
+
 # create or update a user
 - name: create users
   user:
     name: "{{ item.value.name }}"
     comment: "{{ item.value.comment | default(item.value.name) }}"
-    shell: "{{ item.value.shell | default('/bin/bash') }}"
+    shell: "{{ item.value.shell | default(omit) }}"
     system: "{{ item.value.system | default('no') }}"
-    groups: "{{ item.value.groups | default([]) | join(',') }}"
+    groups: "{{ item.value.groups | default(omit) | join(',') }}"
+    append: "{{ item.value.append_groups | default('yes') }}"
     home: "{{ item.value.home|default(omit) }}"
     uid: "{{ item.value.uid|default(omit) }}"
     group: "{{ item.value.group|default(omit) }}"
@@ -33,7 +42,7 @@
 - name: copy home config files
   template:
     src: "{{ item.1.src }}"
-    dest: "{{ item.0.home|default('/home/' ~ item.0.name) }}/{{ item.1.dest|default('') }}"
+    dest: "{{ item.0.home|default('/home/' ~ item.0.name) }}/{{ item.1.dest|default(item.1.src | basename | regex_replace('\\.j2', '') ) }}"
     owner: "{{ item.1.owner|default(item.0.name) }}"
     group: "{{ item.1.group|default(item.0.name) }}"
     mode: "{{ item.1.mode|default('u=rw,g=r,o=r') }}"
@@ -56,11 +65,3 @@
     - "{{ account_users }}"
     - gitconfig
     - { skip_missing: True }
-
-- name: get git bash prompt
-  git:
-    repo: "{{ account_git_bash_prompt_repo_url }}"
-    dest: /opt/bash-git-prompt
-    version: master
-    depth: 1
-    update: no

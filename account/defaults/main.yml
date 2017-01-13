@@ -7,7 +7,7 @@ account_groups: {}
 account_users: {}
   # <username>:
   #   name: <username> # required
-  #   comment: # default = <username>
+  #   comment: # default = <username> : aka GECOS field ex.: Firstname Lastname
   #   home: # default = /home/<username>
   #   home_mode: #default = 'u=rwx,g=rx,o=rx'
   #   home_owner: # default = <username>
@@ -16,13 +16,14 @@ account_users: {}
   #   system: no # is system user ?
   #   group: # primary group, default = <username>
   #   groups: [] # all user groups
-  #   shell: # default = /bin/bash
+  #   append_groups: yes # default yes
+  #   shell: # ex.: /bin/bash or /bin/ash or /usr/bin/zsh
   #   uid:
   #   lock: false # lock password authentication : only ssh key authentication is allowed
   #   salt: # password salt, default = None
   #   config_files: []
   #     # -
-  #     #   src: home/{{ ansible_os_family|lower }}/.bashrc.j2
+  #     #   src: "home/{{ ansible_os_family|lower }}/.bashrc.j2" # relative path to role template directory
   #     #   dest: # default in /home/<username>/
   #     #   owner: # default = <username>
   #     #   group: # default = <username>
@@ -30,14 +31,17 @@ account_users: {}
   #     #   backup: yes
   #     #   force: no
   #     # -
-  #     #   src: home/.bash_aliases.j2
+  #     #   src: "home/.bash_aliases.j2"
   #     #   dest: # default in /home/<username>/
   #     # -
-  #     #   src: home/.zshrc.j2
+  #     #   src: "home/.zshrc.j2"
+  #     #   dest: # default in /home/<username>/
+  #     # -
+  #     #   src: "{{ inventory_dir}}/templates/.my_custom_cfg.j2"
   #     #   dest: # default in /home/<username>/
   #  color_prompt: yes # force terminal color prompt
   #  ssh_agent_autostart: no # start ssh-agent session
-  #   gitconfig:
+  #  gitconfig:
   #     - { name: 'user.name', option: 'Martin Dupond'}
   #     - { name: 'user.email', option: 'martin.dupond@example.com'}
   #  bash_aliases:
