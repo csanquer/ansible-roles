@@ -4,7 +4,24 @@
   register: packer_version_result
   ignore_errors: yes
 
-- name: set packer version fact
+- name: set packer current version fact
   set_fact:
       packer_current_version: "{{ packer_version_result.stdout|default('') }}"
-  register: packer_fact_result
+
+- name: get latest stable packer tag
+  uri:
+    url: "{{ packer_release_api_url }}"
+  ignore_errors: yes
+  register: packer_github_result
+  when: packer_version == 'latest'
+
+- name: set packer version fact
+  set_fact:
+       packer_version: "{{ packer_github_result.json.0.name|default(packer_default_version)|replace('v','') }}"
+  when: packer_version == 'latest'
+
+
+- name: set packer version fact
+  set_fact:
+    packer_version: "{{ packer_default_version }}"
+  when: packer_version == '' or packer_version is none
