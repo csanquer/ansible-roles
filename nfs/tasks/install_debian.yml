@@ -1,9 +1,0 @@
----
-- name: install NFS packages
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - portmap
-    - nfs-common
-    - nfs-kernel-server

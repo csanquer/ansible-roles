@@ -1,9 +1,0 @@
----
-- include: install_debian.yml
-  when: ansible_os_family == 'Debian'
-  tags:
-    - nfs
-
-- include: configure.yml
-  tags:
-    - nfs

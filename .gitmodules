@@ -1,0 +1,42 @@
+[submodule "account"]
+	path = account
+	url = https://github.com/csanquer/ansible-role-account.git
+[submodule "aws"]
+	path = aws
+	url = https://github.com/csanquer/ansible-role-aws.git
+[submodule "dnsmasq"]
+	path = dnsmasq
+	url = https://github.com/csanquer/ansible-role-dnsmasq.git
+[submodule "docker"]
+	path = docker
+	url = https://github.com/csanquer/ansible-role-docker.git
+[submodule "locales"]
+	path = locales
+	url = https://github.com/csanquer/ansible-role-locales.git
+[submodule "network"]
+	path = network
+	url = https://github.com/csanquer/ansible-role-network.git
+[submodule "nfs"]
+	path = nfs
+	url = https://github.com/csanquer/ansible-role-nfs.git
+[submodule "packages"]
+	path = packages
+	url = https://github.com/csanquer/ansible-role-packages.git
+[submodule "packer"]
+	path = packer
+	url = https://github.com/csanquer/ansible-role-packer.git
+[submodule "python"]
+	path = python
+	url = https://github.com/csanquer/ansible-role-python.git
+[submodule "samba"]
+	path = samba
+	url = https://github.com/csanquer/ansible-role-samba.git
+[submodule "sshd"]
+	path = sshd
+	url = https://github.com/csanquer/ansible-role-sshd.git
+[submodule "terraform"]
+	path = terraform
+	url = https://github.com/csanquer/ansible-role-terraform.git
+[submodule "vagrant-tools"]
+	path = vagrant-tools
+	url = https://github.com/csanquer/ansible-role-vagrant-tools.git

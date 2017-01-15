@@ -1,7 +1,0 @@
-# {{ ansible_managed }}
-{% for section,configs in skel_gitconfig.iteritems() %}
-[{{ section }}]
-{%     for key,value in configs.iteritems() %}
-     {{ key }} = {{ value }}
-{%     endfor %}
-{% endfor %}

@@ -1,6 +1,0 @@
----
-- name: configure timezone
-  command: timedatectl set-timezone {{ locale_timezone|default('UTC') }}
-
-- name: configure default locale
-  command: localectl set-locale LANG={{ locale_env.lang|default(locale_default_la ~ '.' ~ locale_default_charset) }}

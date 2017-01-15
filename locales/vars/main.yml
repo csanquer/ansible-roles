@@ -1,2 +1,0 @@
----
-locale_timezone: "{{ locale_timezone_continent }}{{ ('/' ~ locale_timezone_city) if locale_timezone_city else ''}}"

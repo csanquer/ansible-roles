@@ -1,6 +1,0 @@
----
-- name: restart network
-  service:
-    name: networking
-    state: restarted
-  when: network_interfaces_restart

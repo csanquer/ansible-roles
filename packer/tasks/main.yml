@@ -1,7 +1,0 @@
----
-- include: version.yml
-  tags:
-    - packer
-- include: install.yml
-  tags:
-    - packer
