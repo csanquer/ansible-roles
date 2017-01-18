@@ -40,3 +40,6 @@
 [submodule "vagrant-tools"]
 	path = vagrant-tools
 	url = https://github.com/csanquer/ansible-role-vagrant-tools.git
+[submodule "atom"]
+	path = atom
+	url = https://github.com/csanquer/ansible-role-atom.git
