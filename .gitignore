@@ -22,3 +22,12 @@
 /atom/
 /rabbitmq/
 /mongodb/
+/kubectl/
+/haproxy/
+/google-cloud-sdk/
+/helm/
+/json-yaml-tools/
+/kops/
+/kvm/
+/minikube/
+/sshguard/

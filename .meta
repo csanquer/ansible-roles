@@ -22,6 +22,15 @@
     "disk": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-disk.git",
     "atom": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-atom.git",
     "rabbitmq": "git@gitlab.com:csanquer-apps/ansible/roles/rabbitmq.git",
-    "mongodb": "git@gitlab.com:csanquer-apps/ansible/roles/mongodb.git"
+    "mongodb": "git@gitlab.com:csanquer-apps/ansible/roles/mongodb.git",
+    "kubectl": "git@gitlab.com:csanquer-apps/ansible/roles/kubectl.git",
+    "haproxy": "git@gitlab.com:csanquer-apps/ansible/roles/haproxy.git",
+    "google-cloud-sdk": "git@gitlab.com:csanquer-apps/ansible/roles/google-cloud-sdk.git",
+    "helm": "git@gitlab.com:csanquer-apps/ansible/roles/helm.git",
+    "json-yaml-tools": "git@gitlab.com:csanquer-apps/ansible/roles/json-yaml-tools.git",
+    "kops": "git@gitlab.com:csanquer-apps/ansible/roles/kops.git",
+    "kvm": "git@gitlab.com:csanquer-apps/ansible/roles/kvm.git",
+    "minikube": "git@gitlab.com:csanquer-apps/ansible/roles/minikube.git",
+    "sshguard": "git@gitlab.com:csanquer-apps/ansible/roles/sshguard.git"
   }
 }
