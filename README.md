@@ -1,6 +1,9 @@
 ansible-roles
 =============
 
+* Main repository (Gitlab) : https://gitlab.com/csanquer/ansible-roles
+* Mirror repository (Github) : https://github.com/csanquer/ansible-roles
+
 reusable ansible roles
 
 
