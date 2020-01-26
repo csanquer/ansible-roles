@@ -1,0 +1,27 @@
+{
+  "projects": {
+    "account": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-account.git",
+    "python": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-python.git",
+    "packages": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-packages.git",
+    "locales": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-locales.git",
+    "docker": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-docker.git",
+    "terraform": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-terraform.git",
+    "vagrant": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-vagrant.git",
+    "nfs": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-nfs.git",
+    "vagrant-tools": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-vagrant-tools.git",
+    "sshd": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-sshd.git",
+    "packer": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-packer.git",
+    "samba": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-samba.git",
+    "postfix": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-postfix.git",
+    "oh-my-zsh": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-oh-my-zsh.git",
+    "network": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-network.git",
+    "gitlab-runner": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-gitlab-runner.git",
+    "gitlab": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-gitlab.git",
+    "dnsmasq": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-dnsmasq.git",
+    "aws": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-aws.git",
+    "disk": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-disk.git",
+    "atom": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-atom.git",
+    "rabbitmq": "git@gitlab.com:csanquer-apps/ansible/roles/rabbitmq.git",
+    "mongodb": "git@gitlab.com:csanquer-apps/ansible/roles/mongodb.git"
+  }
+}
