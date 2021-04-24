@@ -31,6 +31,8 @@
     "kops": "git@gitlab.com:csanquer-apps/ansible/roles/kops.git",
     "kvm": "git@gitlab.com:csanquer-apps/ansible/roles/kvm.git",
     "minikube": "git@gitlab.com:csanquer-apps/ansible/roles/minikube.git",
-    "sshguard": "git@gitlab.com:csanquer-apps/ansible/roles/sshguard.git"
+    "sshguard": "git@gitlab.com:csanquer-apps/ansible/roles/sshguard.git",
+    "blackbox": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-blackbox.git",
+    "vault": "git@gitlab.com:csanquer-apps/ansible/roles/ansible-role-vault.git"
   }
 }

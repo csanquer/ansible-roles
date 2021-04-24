@@ -31,3 +31,5 @@
 /kvm/
 /minikube/
 /sshguard/
+/blackbox/
+/vault/
